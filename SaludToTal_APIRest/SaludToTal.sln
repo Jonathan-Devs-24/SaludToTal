@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36202.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaludToTal_APIRest", "SaludToTal_APIRest.csproj", "{D98CF904-47BD-4CAA-A534-5AE7200DF95E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaludTotal_AppWeb", "..\SaludTotal_AppWeb\SaludTotal_AppWeb.csproj", "{66985C56-E626-4141-A457-5D0BA89318E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D98CF904-47BD-4CAA-A534-5AE7200DF95E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D98CF904-47BD-4CAA-A534-5AE7200DF95E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D98CF904-47BD-4CAA-A534-5AE7200DF95E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D98CF904-47BD-4CAA-A534-5AE7200DF95E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66985C56-E626-4141-A457-5D0BA89318E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66985C56-E626-4141-A457-5D0BA89318E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66985C56-E626-4141-A457-5D0BA89318E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66985C56-E626-4141-A457-5D0BA89318E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2C0F865-C2DB-4A1D-8972-BB342DF47F18}
+	EndGlobalSection
+EndGlobal
