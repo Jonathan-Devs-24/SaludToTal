@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SaludTotal_APIRest.Data;
+using SaludToTal_APIRest.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 36))));
 
+builder.Services.Configure<CorreoSettings>(builder.Configuration.GetSection("CorreoSettings"));
+builder.Services.AddTransient<CorreoService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
