@@ -8,7 +8,7 @@ namespace SaludToTal_APIRest.Controllers
     public class RecuperarContraController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly AuthService _authService = new AuthService();
+        private readonly AuthService _authService;
         public RecuperarContraController(ApplicationDbContext context, AuthService authService)
         {
             _context = context;
