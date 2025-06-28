@@ -18,6 +18,14 @@ namespace SaludToTal_APIRest.Controllers
         _context = context;
     }
 
+        [HttpGet("todos")]
+        public async Task<IActionResult> GetTodos()
+        {
+            var usuarios = await _context.Usuarios.ToListAsync();
+            return Ok(usuarios);
+        }
+
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO login)
         {
@@ -52,30 +60,40 @@ namespace SaludToTal_APIRest.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDTO dto)
         {
-            if (await _context.Usuarios.AnyAsync(u => u.Correo == dto.Correo))
-                return BadRequest("El correo ya está registrado.");
-
-            string salt = AuthService.GenerarSalt();
-            string hash = AuthService.HashPassword(dto.Contrasenia, salt);
-
-            var nuevoUsuario = new Usuario
+            try
             {
-                Nombre = dto.Nombre,
-                Apellido = dto.Apellido,
-                Dni = dto.Dni,
-                FechaDeNacimiento = dto.FechaDeNacimiento,
-                Correo = dto.Correo,
-                NroTelefono = dto.NroTelefono,
-                Contrasenia = hash,
-                Salt = salt,
-                Rol = dto.Rol
-            };
+                if (await _context.Usuarios.AnyAsync(u => u.Correo == dto.Correo))
+                    return BadRequest("El correo ya está registrado.");
 
-            _context.Usuarios.Add(nuevoUsuario);
-            await _context.SaveChangesAsync();
+                if (await _context.Usuarios.AnyAsync(u => u.Dni == dto.Dni))
+                    return BadRequest("El DNI ya está registrado.");
 
-            return Ok("Usuario registrado correctamente.");
+                string salt = AuthService.GenerarSalt();
+                string hash = AuthService.HashPassword(dto.Contrasenia, salt);
+
+                var nuevoUsuario = new Usuario
+                {
+                    Nombre = dto.Nombre,
+                    Apellido = dto.Apellido,
+                    Dni = dto.Dni,
+                    Correo = dto.Correo,
+                    NroTelefono = dto.NroTelefono,
+                    Contrasenia = hash,
+                    Salt = salt,
+                    Rol = dto.Rol
+                };
+
+                _context.Usuarios.Add(nuevoUsuario);
+                await _context.SaveChangesAsync();
+
+                return Ok("Usuario registrado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno: {ex.Message}");
+            }
         }
+
 
 
     }

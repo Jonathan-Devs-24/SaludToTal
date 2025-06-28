@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SaludToTal_APIRest.DTOs
+namespace SaludTotal_AppWeb.Models
 {
-    public class RegisterUserDTO
+    public class RegisterUserViewModel
     {
         [Required]
         public string Nombre { get; set; }
@@ -20,9 +20,10 @@ namespace SaludToTal_APIRest.DTOs
         public long? NroTelefono { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         public string Contrasenia { get; set; }
 
         [Required]
-        public string Rol { get; set; } // 'Paciente' o 'Profesional'
+        public string Rol { get; set; } // Paciente o Profesional
     }
 }

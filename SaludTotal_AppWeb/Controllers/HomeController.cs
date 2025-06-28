@@ -15,8 +15,9 @@ namespace SaludTotal_AppWeb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(new LoginUserViewModel());
         }
+
 
         public IActionResult Privacy()
         {

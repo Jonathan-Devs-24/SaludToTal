@@ -30,8 +30,6 @@ namespace SaludToTal_APIRest.Models
         [Column("momento_creado")]
         public DateTime MomentoCreado { get; set; } = DateTime.UtcNow;
 
-
-
         public Usuario usuario { get; set; }
     }
 }

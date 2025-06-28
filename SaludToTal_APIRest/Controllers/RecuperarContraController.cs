@@ -22,6 +22,7 @@ namespace SaludToTal_APIRest.Controllers
             return exito ? Ok("Correo enviado") : NotFound("Usuario no encontrado");
         }
 
+
         [HttpGet("validar")]
         public async Task<IActionResult> ValidarToken([FromQuery] string token)
         {

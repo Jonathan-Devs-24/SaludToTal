@@ -2,7 +2,41 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model SaludTotal_AppWeb.Models.LoginUserViewModel
+
+@{
+    ViewBag.Title = "Iniciar Sesión";
+}
+
+<h2>Bienvenido a Salud Total</h2>
+
+<form asp-controller="Auth" asp-action="Login" method="post">
+    <div>
+        <label>Correo</label>
+        <input asp-for="Correo" />
+        <span asp-validation-for="Correo"></span>
+    </div>
+
+    <div>
+        <label>Contraseña</label>
+        <input asp-for="Contrasenia" type="password" />
+        <span asp-validation-for="Contrasenia"></span>
+    </div>
+
+    <button type="submit">Iniciar Sesión</button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
+
+<p>
+    ¿No tenés una cuenta?
+    <a href="/Auth/Register">Registrate aquí</a>
+</p>
+
+<p>
+    ¿Olvidaste tu contraseña?
+    <span style="color:blue; text-decoration:underline;">Recuperar contraseña</span>
+</p>

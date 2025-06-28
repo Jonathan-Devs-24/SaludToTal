@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SaludTotal_APIRest.Data;
 using SaludToTal_APIRest.Models;
+using SaludToTal_APIRest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.Configure<CorreoSettings>(builder.Configuration.GetSection("CorreoSettings"));
 builder.Services.AddTransient<CorreoService>();
 
-
+builder.Services.AddScoped<AuthService>();
 
 
 builder.Services.AddControllers();

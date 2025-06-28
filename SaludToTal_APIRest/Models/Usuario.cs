@@ -24,10 +24,6 @@ namespace SaludToTal_APIRest.Models
         public int Dni { get; set; }
 
         [Required]
-        [Column("fecha_nacimiento")]
-        public DateOnly FechaDeNacimiento { get; set; }
-
-        [Required]
         [Column("correo")]
         public string Correo { get; set; }
 

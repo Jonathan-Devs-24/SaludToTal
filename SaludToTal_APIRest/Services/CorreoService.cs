@@ -1,5 +1,4 @@
-﻿using MailKit.Net.Smtp;
-using MailKit.Security;
+﻿using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using SaludToTal_APIRest.Models;
@@ -23,7 +22,7 @@ public class CorreoService
         mensaje.Subject = "Recuperación de contraseña";
 
         // Este enlace debe apuntar a tu frontend donde se maneja la recuperación de contraseña
-        string link = $"https://frontNOcreadoTODAVIA.com/reestablecer?token={token}"; 
+        string link = $"https://frontNOcreadoTODAVIA.com/reestablecer?token={token}";
 
         mensaje.Body = new TextPart("html")
         {
@@ -37,10 +36,11 @@ public class CorreoService
 
 
         // Enviar el mensaje usando MailKit (EN PROCESO)
-        /*using var smtp = new SmtpClient();
+
+        var smtp = new MailKit.Net.Smtp.SmtpClient();
         await smtp.ConnectAsync(_settings.ServidorSMTP, _settings.Puerto, SecureSocketOptions.StartTls);
         await smtp.AuthenticateAsync(_settings.Usuario, _settings.Clave);
         await smtp.SendAsync(mensaje);
-        await smtp.DisconnectAsync(true);*/
+        await smtp.DisconnectAsync(true);
     }
 }
