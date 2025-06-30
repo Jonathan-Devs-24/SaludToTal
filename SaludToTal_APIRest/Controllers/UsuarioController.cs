@@ -11,12 +11,40 @@ namespace SaludToTal_APIRest.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
+
     {
         private readonly ApplicationDbContext _context;
-    public UsuarioController (ApplicationDbContext context)
-    {
-        _context = context;
-    }
+       public UsuarioController (ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet("paginados")]
+        public async Task<IActionResult> GetPaginados(int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                var totalItems = await _context.Usuarios.CountAsync();
+                var items = await _context.Usuarios
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                var resultado = new PaginatedResponse<Usuario>
+                {
+                    TotalItems = totalItems,
+                    Page = page,
+                    PageSize = pageSize,
+                    Data = items
+                };
+
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno: {ex.Message}");
+            }
+        }
 
         [HttpGet("todos")]
         public async Task<IActionResult> GetTodos()
@@ -93,8 +121,6 @@ namespace SaludToTal_APIRest.Controllers
                 return StatusCode(500, $"Error interno: {ex.Message}");
             }
         }
-
-
 
     }
 }

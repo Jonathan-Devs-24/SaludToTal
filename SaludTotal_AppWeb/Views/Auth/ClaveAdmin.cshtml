@@ -1,0 +1,17 @@
+﻿@model SaludTotal_AppWeb.Models.ClaveAdminViewModel
+
+<h2>Ingreso Administrador</h2>
+
+<form asp-controller="Auth" asp-action="AdminLogin" method="post">
+    <div>
+        <label>Clave de Administrador</label>
+        <input asp-for="Clave" type="password" />
+        <span asp-validation-for="Clave"></span>
+    </div>
+    <button type="submit">Ingresar </button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
