@@ -8,7 +8,7 @@ namespace SaludToTal_APIRest.Models
     {
         [Key]
         [Column("id_paciente")]
-        public int IdPacinete { get; set; }
+        public int IdPaciente { get; set; }
 
         [ForeignKey(nameof(usuario))] 
         [Column("id_usuario")]
