@@ -47,6 +47,32 @@ namespace SaludToTal_APIRest.Controllers
                 .ToListAsync();
         }
 
+        // GET: api/Profesional/paginado?page=1&pageSize=10
+        [HttpGet("paginado")]
+        public async Task<ActionResult<PaginatedResponse<Profesional>>> GetProfesionalesPaginados(
+         [FromQuery] int page = 1,
+         [FromQuery] int pageSize = 10)
+{
+            var totalItems = await _context.Profesionales.CountAsync();
+
+         var profesionales = await _context.Profesionales
+        .Include(p => p.usuario)
+        .Skip((page - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
+
+         var response = new PaginatedResponse<Profesional>
+         {
+        Data = profesionales,
+        TotalItems = totalItems,
+        Page = page,
+        PageSize = pageSize
+         };
+
+            return Ok(response);
+        }
+
+
         // GET: api/Profesional/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Profesional>> GetProfesional(int id)

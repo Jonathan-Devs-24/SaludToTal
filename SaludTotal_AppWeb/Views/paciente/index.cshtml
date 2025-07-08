@@ -1,8 +1,8 @@
-@model List<SaludTotal_AppWeb.Models.PacienteViewModel>
+@model IEnumerable<SaludTotal_AppWeb.Models.PacienteViewModel>
 
-<h1>Pacientes</h1>
+<h2>Lista de Pacientes</h2>
 
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -10,32 +10,26 @@
             <th>DNI</th>
             <th>Correo</th>
             <th>Teléfono</th>
-            <th>N° Afiliado</th>
+            <th>Afiliado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var paciente in Model)
-        {
-            <tr>
-                <td>@paciente.Nombre</td>
-                <td>@paciente.Apellido</td>
-                <td>@paciente.Dni</td>
-                <td>@paciente.Correo</td>
-                <td>@paciente.NroTelefono</td>
-                <td>@paciente.NumeroAfiliado</td>
-            </tr>
-        }
+    @foreach (var paciente in Model)
+    {
+        <tr>
+            <td>@paciente.Nombre</td>
+            <td>@paciente.Apellido</td>
+            <td>@paciente.Dni</td>
+            <td>@paciente.Correo</td>
+            <td>@paciente.NroTelefono</td>
+            <td>@paciente.NumeroAfiliado</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@paciente.IdPaciente" class="btn btn-info">Ver</a>
+                <a asp-action="Edit" asp-route-id="@paciente.IdPaciente" class="btn btn-warning">Editar</a>
+                <a asp-action="Delete" asp-route-id="@paciente.IdPaciente" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este paciente?')">Eliminar</a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
-
-<div>
-    Página @ViewBag.Page de @ViewBag.TotalPages
-    @if (ViewBag.Page > 1)
-    {
-        <a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })">Anterior</a>
-    }
-    @if (ViewBag.Page < ViewBag.TotalPages)
-    {
-        <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })">Siguiente</a>
-    }
-</div>

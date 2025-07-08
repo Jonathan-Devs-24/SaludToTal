@@ -1,0 +1,45 @@
+@model SaludTotal_AppWeb.Models.ProfesionalViewModel
+
+<h2>Editar Profesional</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="IdProfesional" />
+
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Apellido"></label>
+        <input asp-for="Apellido" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Dni"></label>
+        <input asp-for="Dni" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Correo"></label>
+        <input asp-for="Correo" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NroTelefono"></label>
+        <input asp-for="NroTelefono" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NroMatricula"></label>
+        <input asp-for="NroMatricula" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HorarioAtencion"></label>
+        <input asp-for="HorarioAtencion" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

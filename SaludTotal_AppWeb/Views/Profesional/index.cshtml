@@ -1,0 +1,37 @@
+@model IEnumerable<SaludTotal_AppWeb.Models.ProfesionalViewModel>
+
+<h2>Lista de Profesionales</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Matrícula</th>
+            <th>Horario</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var profesional in Model)
+    {
+        <tr>
+            <td>@profesional.Nombre</td>
+            <td>@profesional.Apellido</td>
+            <td>@profesional.Dni</td>
+            <td>@profesional.Correo</td>
+            <td>@profesional.NroTelefono</td>
+            <td>@profesional.NroMatricula</td>
+            <td>@profesional.HorarioAtencion</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@profesional.IdProfesional" class="btn btn-info">Ver</a>
+                <a asp-action="Edit" asp-route-id="@profesional.IdProfesional" class="btn btn-warning">Editar</a>
+                <a asp-action="Delete" asp-route-id="@profesional.IdProfesional" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este profesional?')">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -4,45 +4,45 @@ using SaludTotal_AppWeb.Models;
 using System.Net.Http;
 using System.Text;
 
-public class PacienteController : Controller
+public class ProfesionalController : Controller
 {
     private readonly HttpClient _httpClient;
-    private readonly string _apiUrl = "http://localhost:5065/api/Paciente";
+    private readonly string _apiUrl = "http://localhost:5065/api/Profesional";
 
-    public PacienteController(IHttpClientFactory httpClientFactory)
+    public ProfesionalController(IHttpClientFactory httpClientFactory)
     {
         _httpClient = httpClientFactory.CreateClient();
     }
 
     public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
     {
-        var response = await _httpClient.GetAsync($"https://saludtotalapirest-ame2f3hrd7h5csc4.chilecentral-01.azurewebsites.net/api/Paciente/paginado?page={page}&pageSize={pageSize}");
-
+        var response = await _httpClient.GetAsync($"{_apiUrl}/paginado?page={page}&pageSize={pageSize}");
         if (!response.IsSuccessStatusCode)
-            return View(new List<PacienteViewModel>());
+            return View(new List<ProfesionalViewModel>());
 
         var json = await response.Content.ReadAsStringAsync();
         dynamic result = JsonConvert.DeserializeObject(json);
 
-        var pacientes = new List<PacienteViewModel>();
+        var profesionales = new List<ProfesionalViewModel>();
         foreach (var item in result.data)
         {
-            pacientes.Add(new PacienteViewModel
+            profesionales.Add(new ProfesionalViewModel
             {
-                IdPaciente = item.idPaciente,
+                IdProfesional = item.idProfesional,
                 Nombre = item.usuario.nombre,
                 Apellido = item.usuario.apellido,
                 Dni = item.usuario.dni,
                 Correo = item.usuario.correo,
                 NroTelefono = item.usuario.nroTelefono,
-                NumeroAfiliado = item.numeroAfiliado
+                NroMatricula = item.nroMatricula,
+                HorarioAtencion = item.horarioAtencion
             });
         }
 
         ViewBag.Page = (int)result.page;
         ViewBag.TotalPages = (int)Math.Ceiling((double)result.totalItems / result.pageSize);
 
-        return View(pacientes);
+        return View(profesionales);
     }
 
     public async Task<IActionResult> Details(int id)
@@ -52,9 +52,9 @@ public class PacienteController : Controller
             return NotFound();
 
         var json = await response.Content.ReadAsStringAsync();
-        var paciente = JsonConvert.DeserializeObject<PacienteViewModel>(json);
+        var profesional = JsonConvert.DeserializeObject<ProfesionalViewModel>(json);
 
-        return View(paciente);
+        return View(profesional);
     }
 
     [HttpGet]
@@ -65,18 +65,18 @@ public class PacienteController : Controller
             return NotFound();
 
         var json = await response.Content.ReadAsStringAsync();
-        var paciente = JsonConvert.DeserializeObject<PacienteViewModel>(json);
+        var profesional = JsonConvert.DeserializeObject<ProfesionalViewModel>(json);
 
-        return View(paciente);
+        return View(profesional);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(PacienteViewModel model)
+    public async Task<IActionResult> Edit(ProfesionalViewModel model)
     {
         var json = JsonConvert.SerializeObject(model);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        var response = await _httpClient.PutAsync($"{_apiUrl}/{model.IdPaciente}", content);
+        var response = await _httpClient.PutAsync($"{_apiUrl}/{model.IdProfesional}", content);
         if (!response.IsSuccessStatusCode)
             return View(model);
 
